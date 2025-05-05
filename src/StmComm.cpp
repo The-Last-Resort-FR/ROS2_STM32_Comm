@@ -2,12 +2,7 @@
 
 namespace STComm {
     SerialComm::SerialComm(std::string busPath) {
-        mPort = new SerialPort(busPath);
-        mPort->SetBaudRate(BaudRate::BAUD_1152000);
-        mPort->SetCharacterSize(CharacterSize::CHAR_SIZE_8);
-        mPort->SetFlowControl(FlowControl::FLOW_CONTROL_NONE);
-        mPort->SetParity(Parity::PARITY_NONE);
-        mPort->SetStopBits(StopBits::STOP_BITS_1);
+        mPort = new SerialPort(busPath, BaudRate::BAUD_1152000, CharacterSize::CHAR_SIZE_8, FlowControl::FLOW_CONTROL_NONE, Parity::PARITY_NONE, StopBits::STOP_BITS_1, true);
     }
     
     SerialComm::~SerialComm() {
@@ -40,7 +35,7 @@ namespace STComm {
         request.push_back(arg & 0x00FF);
     
         mPort->Write(request);
-        mPort->Read(response);
+        mPort->Read(response, 9, 1000);
         try {
             return VecToSerialResponse(response);
         }
@@ -87,5 +82,14 @@ namespace STComm {
 
     bool StmComm::GetTrigStatus() {
         return COMM_OK;
+    }
+
+    void PrintResponse(SerialResponse r) {
+        uint8_t* cast = (uint8_t*)&r;
+        printf("Response:\t");
+        for(uint8_t curr = 0; curr < 9; curr++) {
+            printf("%X ", *(cast+curr));
+        }
+        printf("\n");
     }
 }

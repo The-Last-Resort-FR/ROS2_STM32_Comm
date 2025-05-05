@@ -11,7 +11,7 @@ This node is intended to be modified to add more commands later or change all th
 ### Dependencies
 
 - ROS2 Humble
-- [libserial](https://github.com/crayzeewulf/libserial)
+- [libserial](https://github.com/crayzeewulf/libserial)  
 
 ### Installing
 
@@ -27,6 +27,15 @@ colcon build --symlink-install
 Source the environement  
 ```bash
 source install/setup.bash
+```
+
+If running it with ROS2 gives undefinied symbol error then -# to fix
+```bash
+rm -rf build
+mkdir build && cd build
+cmake . -S ..
+make
+./stm_comm
 ```
 
 ### Executing program

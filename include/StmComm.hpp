@@ -65,4 +65,6 @@ namespace STComm {
         uint16_t GetTrigFreq();
         bool GetTrigStatus();
     };
+
+    void PrintResponse(SerialResponse r);
 }
