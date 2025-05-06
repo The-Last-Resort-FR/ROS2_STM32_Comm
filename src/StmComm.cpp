@@ -55,35 +55,6 @@ namespace STComm {
         return s;
     }
 
-    StmComm::StmComm(std::string busPath): SerialComm(busPath) {
-
-    }
-
-    StmComm::~StmComm() {
-
-    }
-
-    bool StmComm::SetTrigFrequ(uint16_t f) {
-        (void)f;
-        return COMM_OK;
-    }
-
-    bool StmComm::StartTrig() {
-        return COMM_OK;
-    }
-
-    bool StmComm::StopTrig() {
-        return COMM_OK;
-    }
-
-    uint16_t StmComm::GetTrigFreq() {
-        return 0;
-    }
-
-    bool StmComm::GetTrigStatus() {
-        return COMM_OK;
-    }
-
     void PrintResponse(SerialResponse r) {
         uint8_t* cast = (uint8_t*)&r;
         printf("Response:\t");

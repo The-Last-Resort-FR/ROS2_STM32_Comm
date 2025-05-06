@@ -52,19 +52,5 @@ namespace STComm {
             static SerialResponse* VecToSerialResponse(const std::vector<uint8_t>& v);
     };
 
-    // Project specific
-    class StmComm : protected SerialComm {
-    private:
-
-    public:
-        StmComm(std::string busPath);
-        ~StmComm();
-        bool SetTrigFrequ(uint16_t f);
-        bool StartTrig();
-        bool StopTrig();
-        uint16_t GetTrigFreq();
-        bool GetTrigStatus();
-    };
-
     void PrintResponse(SerialResponse r);
 }

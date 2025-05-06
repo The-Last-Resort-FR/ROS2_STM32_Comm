@@ -15,16 +15,21 @@ This node is intended to be modified to add more commands later or change all th
 
 ### Installing
 
-Clone the repository  
+This repo needs the custom messages of [ROS2_Custom_Msg](https://github.com/The-Last-Resort-FR/ROS2_Custom_Msg)
+Clone the repositories
 ```bash
 git clone https://github.com/The-Last-Resort-FR/ROS2_STM32_Comm.git
-cd ROS2_STM32_Comm
+git clone https://github.com/The-Last-Resort-FR/ROS2_Custom_Msg.git
 ```  
-Build  
+Build ROS2_Custom_Msg first then ROS2_STM32_Comm
 ```bash
+cd ROS2_Custom_Msg
+colcon build
+source install/setup.sh
+cd ../ROS2_STM32_Comm
 colcon build --symlink-install
 ```
-Source the environement  
+Source the environement of ROS2_STM32_Comm
 ```bash
 source install/setup.bash
 ```
@@ -47,10 +52,8 @@ ros2 run stm_comm stm_comm
 
 ## TODO
 
-- Wrapper
-- Multiple data
+- Seperate wrapper library to handle communication with this node
 - Resend
-- ROS2 integration
 
 ## Tested Hardware
 
@@ -60,11 +63,8 @@ ros2 run stm_comm stm_comm
 ## Version History
 
 - V0.0.0 : Raw comm and structure
+- V0.1.0 : ROS2 Server and cleanup
 
 ## License
 
 This project is licensed under the "The Unlicense" License - see the LICENSE.md file for details
-
-## Acknowledgments
-
--  
