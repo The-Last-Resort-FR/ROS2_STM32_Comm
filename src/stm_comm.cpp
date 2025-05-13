@@ -20,25 +20,31 @@ void SrvCommandHandler(const std::shared_ptr<custom_msg::srv::Stcommand::Request
     }
     else {
         sr = pScomm->SendCommand((STComm::Commands)request->command, request->arg);
+        RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Sending command: %u, arg: %u", request->command, request->arg);
     }
 
     if(sr == nullptr) {
         RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "SerialComm gave an empty answer");
         return;
     }
-    mempcpy(&(response->response), sr, sizeof(STComm::SerialResponse));
+    //mempcpy(response->response.data(), sr, sizeof(STComm::SerialResponse));
+    uint8_t* temp = (uint8_t*)sr;
+    for(uint8_t i = 0; i < 9; i++) {
+        response->response[i] = temp[i];
+    }
+    STComm::PrintResponse(*sr);
     delete sr;
 }
 
 int main(int argc, char **argv) {
     rclcpp::init(argc, argv);
     std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("stm_comm_server");
-    STComm::SerialComm sc("/dev/ttyACM0");
+    STComm::SerialComm sc("/dev/ttyACM1");
     pScomm = &sc;
 
     rclcpp::Service<custom_msg::srv::Stcommand>::SharedPtr service = node->create_service<custom_msg::srv::Stcommand>("send_stm_commands",  &SrvCommandHandler);
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Ready to receive commands");
-
+    
     rclcpp::spin(node);
     rclcpp::shutdown();
 }

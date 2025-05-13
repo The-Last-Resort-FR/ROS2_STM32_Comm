@@ -53,7 +53,7 @@ namespace STComm {
             repArray[i] = v.data()[i];
         }
         return s;
-    }
+    } 
 
     void PrintResponse(SerialResponse r) {
         uint8_t* cast = (uint8_t*)&r;
