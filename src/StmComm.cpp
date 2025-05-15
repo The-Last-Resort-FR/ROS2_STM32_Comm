@@ -2,7 +2,7 @@
 
 namespace STComm {
     SerialComm::SerialComm(std::string busPath) {
-        mPort = new SerialPort(busPath, BaudRate::BAUD_1152000, CharacterSize::CHAR_SIZE_8, FlowControl::FLOW_CONTROL_NONE, Parity::PARITY_NONE, StopBits::STOP_BITS_1, true);
+        mPort = new SerialPort(busPath, BaudRate::BAUD_1152000, CharacterSize::CHAR_SIZE_8, FlowControl::FLOW_CONTROL_NONE, Parity::PARITY_NONE, StopBits::STOP_BITS_1);
     }
     
     SerialComm::~SerialComm() {

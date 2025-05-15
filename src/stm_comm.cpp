@@ -39,7 +39,11 @@ void SrvCommandHandler(const std::shared_ptr<custom_msg::srv::Stcommand::Request
 int main(int argc, char **argv) {
     rclcpp::init(argc, argv);
     std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("stm_comm_server");
-    STComm::SerialComm sc("/dev/ttyACM1");
+
+    std::string busName;
+    node->declare_parameter<std::string>("bus_name", "");
+    node->get_parameter("bus_name", busName);
+    STComm::SerialComm sc(busName);
     pScomm = &sc;
 
     rclcpp::Service<custom_msg::srv::Stcommand>::SharedPtr service = node->create_service<custom_msg::srv::Stcommand>("send_stm_commands",  &SrvCommandHandler);

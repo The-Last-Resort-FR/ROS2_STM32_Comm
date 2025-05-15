@@ -34,20 +34,11 @@ Source the environement of ROS2_STM32_Comm
 source install/setup.bash
 ```
 
-If running it with ROS2 gives undefinied symbol error then -# to fix
-```bash
-rm -rf build
-mkdir build && cd build
-cmake . -S ..
-make
-./stm_comm
-```
-
 ### Executing program
 
 Run the node  
 ```bash
-ros2 run stm_comm stm_comm
+ros2 launch stm_comm launch.py
 ```
 
 ## TODO
